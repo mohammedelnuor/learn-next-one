@@ -1,12 +1,12 @@
-import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import Image from 'next/image'
+import { Disclosure, DisclosureButton, DisclosurePanel,  } from '@headlessui/react';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import Image from 'next/image';
 
 const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
+  { name: ' Home', href: '#', current: true },
+  { name: ' About', href: '#', current: false },
+  { name: 'Our Services', href: '#', current: false },
+  { name: 'Contact Us', href: '#', current: false },
 ]
 
 function classNames(...classes: string[]) {
@@ -15,29 +15,34 @@ function classNames(...classes: string[]) {
 
 export default function Navbar() {
   return (
-    <Disclosure as="nav" className="relative bg-gray-800">
+    <Disclosure as="nav" className="relative bg-cyan-600">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
-          <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-            {/* Mobile menu button*/}
-            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white focus:outline-2 focus:-outline-offset-1 focus:outline-indigo-500">
+          
+          {/* Logo */}
+          <div className="flex shrink-0 items-center">
+            <Image
+              alt="Your Company"
+              src="/logee.jpeg"
+              width={45}
+              height={45}
+              className="h-8 w-auto rounded-full"
+            />
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="absolute inset-y-0 right-0 flex items-center sm:hidden">
+            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-cyan-100 hover:bg-cyan-700 hover:text-white focus:outline-2 focus:-outline-offset-1 focus:outline-indigo-500 transition">
               <span className="absolute -inset-0.5" />
               <span className="sr-only">Open main menu</span>
               <Bars3Icon aria-hidden="true" className="block size-6 group-data-open:hidden" />
               <XMarkIcon aria-hidden="true" className="hidden size-6 group-data-open:block" />
             </DisclosureButton>
           </div>
-          <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-            <div className="flex shrink-0 items-center">
-              <Image
-                alt="Your Company"
-                src="/next.svg"
-                width={32}
-                height={32}
-                className="h-8 w-auto"
-              />
-            </div>
-            <div className="hidden sm:ml-6 sm:block">
+
+          {/* Center navigation */}
+          <div className="flex flex-1 items-center justify-center">
+            <div className="hidden sm:block">
               <div className="flex space-x-4">
                 {navigation.map((item) => (
                   <a
@@ -45,8 +50,10 @@ export default function Navbar() {
                     href={item.href}
                     aria-current={item.current ? 'page' : undefined}
                     className={classNames(
-                      item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white',
-                      'rounded-md px-3 py-2 text-sm font-medium',
+                      item.current
+                        ? 'bg-cyan-700 text-white'
+                        : 'text-cyan-50 hover:bg-cyan-500 hover:text-white',
+                      'rounded-md px-3 py-2 text-sm font-medium transition'
                     )}
                   >
                     {item.name}
@@ -55,64 +62,11 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-          <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            <button
-              type="button"
-              className="relative rounded-full p-1 text-gray-400 focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500"
-            >
-              <span className="absolute -inset-1.5" />
-              <span className="sr-only">View notifications</span>
-              <BellIcon aria-hidden="true" className="size-6" />
-            </button>
 
-            {/* Profile dropdown */}
-            <Menu as="div" className="relative ml-3">
-              <MenuButton className="relative flex rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
-                <span className="absolute -inset-1.5" />
-                <Image
-                  alt="ar"
-                  src="/window.svg"
-                  width={32}
-                  height={32}
-                  className="rounded-full bg-gray-800 outline -outline-offset-1 outline-white/10"
-                />
-                
-              </MenuButton>
-
-              <MenuItems
-                transition
-                className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg outline outline-black/5 transition data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
-              >
-                <MenuItem>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
-                  >
-                    Your profile
-                  </a>
-                </MenuItem>
-                <MenuItem>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
-                  >
-                    Settings
-                  </a>
-                </MenuItem>
-                <MenuItem>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
-                  >
-                    Sign out
-                  </a>
-                </MenuItem>
-              </MenuItems>
-            </Menu>
-          </div>
         </div>
       </div>
 
+      {/* Mobile Navigation */}
       <DisclosurePanel className="sm:hidden">
         <div className="space-y-1 px-2 pt-2 pb-3">
           {navigation.map((item) => (
@@ -122,8 +76,10 @@ export default function Navbar() {
               href={item.href}
               aria-current={item.current ? 'page' : undefined}
               className={classNames(
-                item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white',
-                'block rounded-md px-3 py-2 text-base font-medium',
+                item.current
+                  ? 'bg-cyan-700 text-white'
+                  : 'text-cyan-50 hover:bg-cyan-500 hover:text-white',
+                'block rounded-md px-3 py-2 text-base font-medium transition'
               )}
             >
               {item.name}
